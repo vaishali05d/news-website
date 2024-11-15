@@ -6,7 +6,6 @@ const NewsApp = () => {
     const [newsData, setNewsData] = useState(null);
     const API_KEY = "38d7b78ca16c4ada91b599dd6a4af2dd";
 
-    // Memoized getData function to prevent re-creation
     const getData = useCallback(async () => {
         try {
             const response = await fetch(`https://newsapi.org/v2/everything?q=${search}&apiKey=${API_KEY}`);
@@ -16,14 +15,13 @@ const NewsApp = () => {
         } catch (error) {
             console.error("Failed to fetch data:", error);
         }
-    }, [search, API_KEY]);
+    }, [search]);
 
     useEffect(() => {
         getData();
     }, [getData]);
 
     const handleInput = (e) => {
-        console.log(e.target.value);
         setSearch(e.target.value);
     };
 
@@ -38,18 +36,31 @@ const NewsApp = () => {
                     <h1>Trendy News</h1>
                 </div>
                 <ul style={{ display: "flex", gap: "11px" }}>
-                    <a href="#" style={{ fontWeight: 600, fontSize: "17px" }}>All News</a>
-                    <a href="#" style={{ fontWeight: 600, fontSize: "17px" }}>Trending</a>
+                    <button
+                        style={{ fontWeight: 600, fontSize: "17px", background: "none", border: "none", cursor: "pointer" }}
+                    >
+                        All News
+                    </button>
+                    <button
+                        style={{ fontWeight: 600, fontSize: "17px", background: "none", border: "none", cursor: "pointer" }}
+                    >
+                        Trending
+                    </button>
                 </ul>
-                <div className='searchBar'>
-                    <input type='text' placeholder='Search News' value={search} onChange={handleInput} />
+                <div className="searchBar">
+                    <input
+                        type="text"
+                        placeholder="Search News"
+                        value={search}
+                        onChange={handleInput}
+                    />
                     <button onClick={getData}>Search</button>
                 </div>
             </nav>
             <div>
-                <p className='head'>Stay Update with TrendyNews</p>
+                <p className="head">Stay Update with TrendyNews</p>
             </div>
-            <div className='categoryBtn'>
+            <div className="categoryBtn">
                 <button onClick={userInput} value="sports">Sports</button>
                 <button onClick={userInput} value="politics">Politics</button>
                 <button onClick={userInput} value="entertainment">Entertainment</button>
