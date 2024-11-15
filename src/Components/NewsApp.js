@@ -4,11 +4,11 @@ import Card from './Card';
 const NewsApp = () => {
     const [search, setSearch] = useState("india");
     const [newsData, setNewsData] = useState(null);
-    const API_KEY = "38d7b78ca16c4ada91b599dd6a4af2dd";
+    const API_KEY = "47ad7c32238e38247947ef656e878a02";
 
     const getData = useCallback(async () => {
         try {
-            const response = await fetch(`https://newsapi.org/v2/everything?q=${search}&apiKey=${API_KEY}`);
+            const response = await fetch(`https://gnews.io/api/v4/search?q=${search}&apikey=${API_KEY}`);
             const jsonData = await response.json();
             console.log(jsonData.articles);
             setNewsData(jsonData.articles);
